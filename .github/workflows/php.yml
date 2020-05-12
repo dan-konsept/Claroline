@@ -1,0 +1,36 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ master, 12.5, deploy-jelastic ]
+  pull_request:
+    branches: [ master, 12.5, deploy-jelastic ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Configure php
+      run: php scripts/configure.php --default
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate
+
+    - name: Install dependencies - nodejs
+      run: npm install
+
+    - name: Build dependencies - composer with webpack
+      run: composer build
+
+    - name: Install dependencies - composer
+      run: composer update
+
+    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
+    # Docs: https://getcomposer.org/doc/articles/scripts.md
+
+    # - name: Run test suite
+    #   run: composer run-script test
