@@ -20,14 +20,14 @@ jobs:
     - name: Validate composer.json and composer.lock
       run: composer validate
 
-    - name: Install dependencies - composer
-      run: composer update
-
     - name: Install dependencies - nodejs
       run: npm install
 
     - name: Build dependencies - composer with webpack
       run: composer build
+
+    - name: Install dependencies - composer
+      run: composer update
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
