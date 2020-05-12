@@ -21,7 +21,7 @@ jobs:
       run: composer validate
 
     - name: Install dependencies - composer
-      run: composer update --no-progress --no-suggest
+      run: composer update
 
     - name: Install dependencies - nodejs
       run: npm install
